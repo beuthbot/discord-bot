@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  discord-bot:
+    build: .
+    restart: unless-stopped
+    environment:
+      - GATEWAY_ENDPOINT
+      - DISCORD_TOKEN
+networks:
+  default:
+    external:
+      name: beuthbot_network

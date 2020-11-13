@@ -1,0 +1,4 @@
+.env
+message_example.txt
+node_modules/
+.idea
