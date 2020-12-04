@@ -13,7 +13,7 @@ import {stripMentions} from "./discord/helpers";
 // use `dotenv` to ready `.env` file even when not running with docker-compose
 dotenvConig();
 
-const gateway = new Gateway(undefined, 'disco');
+const gateway = new Gateway(process.env.GATEWAY_ENDPOINT, 'disco');
 const client = new Client();
 
 // selfUpdateCommand();
