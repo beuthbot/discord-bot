@@ -7,7 +7,7 @@
 
 import {config as dotenvConig} from 'dotenv';
 import {Client, MessageAttachment} from 'discord.js';
-import {Gateway, BotRequest} from '@bhtbot/bhtbot';
+import {BotRequest, Gateway} from '@bhtbot/bhtbot';
 import {stripMentions} from "./discord/helpers";
 
 // use `dotenv` to ready `.env` file even when not running with docker-compose
@@ -16,7 +16,7 @@ dotenvConig();
 // start service
 start();
 
-
+// socket connection for asynchronous messages from gateway
 async function configureSocket(gateway: Gateway, client: Client) {
     const sock = await gateway.connectWebSocket()
 
@@ -33,6 +33,7 @@ async function configureSocket(gateway: Gateway, client: Client) {
     })
 }
 
+// create discord connection and handle messages
 async function start() {
 
     const gateway = new Gateway(process.env.GATEWAY_ENDPOINT, 'discord');
@@ -44,6 +45,7 @@ async function start() {
 
     client.on('ready', () => {
         console.log(`Logged in as ${client.user.tag}!`);
+        console.log(client.user);
     });
 
     client.on('message', queryMessage => {
@@ -69,12 +71,6 @@ async function start() {
         if (message.payload.text === 'uptime') {
             return queryMessage.reply('BHT Discord Chatbot is running for ' + Math.floor(client.uptime / 1000 / 60) + ' minutes');
         }
-
-        // if(message.payload.text === 'pong'){
-        //     return setTimeout(()=>{
-        //         sendToUser(author.id, 'Ping');
-        //     }, Math.floor(Math.random() * 5000));
-        // }
 
         // @bot mentioned messages
         if (isMentioned) {
