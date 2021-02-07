@@ -82,7 +82,12 @@ async function start() {
                     const responseMessage = botResponse.answer.content;
                     queryMessage.reply(responseMessage)
                 } else {
-                    queryMessage.reply('ERROR cant connect to bot gateway')
+                    if(botResponse && botResponse.answer && botResponse.answer.error){
+                        queryMessage.reply(botResponse.answer.error);
+                    }
+                    else{
+                        queryMessage.reply('Unknown Error, probably cant connect to bot gateway')
+                    }
                 }
             });
 

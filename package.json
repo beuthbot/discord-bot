@@ -12,7 +12,7 @@
   "author": "Dennis Walz",
   "license": "ISC",
   "dependencies": {
-    "@bhtbot/bhtbot": "^1.0.9",
+    "@bhtbot/bhtbot": "^1.0.17",
     "@types/node": "^14.14.10",
     "axios": "^0.20.0",
     "discord.js": "^12.4.0",
